@@ -1,0 +1,27 @@
+<p-table [value]="categories" responsiveLayout="scroll">
+  <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-content-between">
+      Categories
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-category>
+    <tr>
+      <td>{{category.name}}</td>
+      <td>
+        <button pButton type="button" label="Edit" class="p-button-outlined" routerLink="/categories/edit/{{category.id}}"></button> &nbsp;
+        <button pButton type="button" label="Delete" class="p-button-danger p-button-outlined"></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="flex align-items-center justify-content-between">
+      In total there are {{categories ? categories.length : 0 }} categories.
+    </div>
+  </ng-template>
+</p-table>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {MenuItem} from "primeng/api";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'crud-app';
+
+  items: MenuItem[] = [
+    {
+      label: 'Categories',
+      icon: 'pi pi-fw pi-pencil',
+      routerLink: 'categories'
+    },
+    {
+      label: 'Products',
+      icon: 'pi pi-fw pi-pencil',
+      routerLink: 'products'
+    }
+  ];
+
+
 }
