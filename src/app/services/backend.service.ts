@@ -42,16 +42,19 @@ export class BackendService {
 
 
   createCategory(name:string) {
-    this.categories.push( {id: this.categories.length, name: name});
+    this.getCategories();
+    this.categories.push( {id: this.categories.length === 0 ? 1 : this.categories.length, name: name});
     localStorage.setItem('categories', JSON.stringify(this.categories));
   }
 
   createProduct(product:Product) {
-    this.products.push( {id: this.products.length, name: product.name, price: Number(product.price), image: product.image, category:product.category});
+    this.getProducts();
+    this.products.push( {id: this.products.length === 0 ? 1 : this.products.length, name: product.name, price: Number(product.price), image: product.image, category:product.category});
     localStorage.setItem('products', JSON.stringify(this.products));
   }
 
   editCategory(id:number, name:string) {
+    this.getCategories();
     this.categories?.map( (i:Category) => {
       if (i.id === Number(id)) {
         i.name = name;
@@ -62,6 +65,7 @@ export class BackendService {
   }
 
   editProduct(id:number, product:Product) {
+    this.getProducts();
     this.products?.map( (i:Product) => {
       if (i.id === Number(id)) {
         i.name = product.name;
@@ -74,6 +78,7 @@ export class BackendService {
   }
 
   deleteProduct(id:number) {
+    this.getProducts();
     this.products?.map( (i:Product, index: number) => {
       if (i.id === id) {
         this.products.splice(index, 1)
@@ -83,6 +88,7 @@ export class BackendService {
   }
 
   deleteCategory(id:number) {
+    this.getCategories();
     this.categories?.map( (i:Product, index: number) => {
       if (i.id === id) {
         this.categories.splice(index, 1)
