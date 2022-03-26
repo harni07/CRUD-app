@@ -15,6 +15,7 @@ export class ProductCreateComponent implements OnInit {
 
   productForm: FormGroup;
   submittedProductForm = false;
+  categoryError = false;
 
   productId: number = 0;
 
@@ -46,7 +47,10 @@ export class ProductCreateComponent implements OnInit {
   }
 
   getCategories() {
-    this.categories = this.service.getCategories();
+    this.categories.push( {id: 0, name: 'Select category'})
+    this.service.getCategories().map( (i:Category) => {
+      this.categories.push(i);
+    });
   }
 
   get validateForm() {
@@ -60,6 +64,13 @@ export class ProductCreateComponent implements OnInit {
     if (this.productForm.invalid) {
       return;
     }
+
+    if (this.productForm.value.category.name === 'Select category') {
+      this.categoryError = true;
+      return;
+    }
+
+    this.productForm.value.category = this.productForm.value.category.name
 
     this.service.createProduct(this.productForm.value);
     this.router.navigate(['/products']);

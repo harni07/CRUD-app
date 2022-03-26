@@ -1,41 +1,43 @@
-<br>
-<br>
-<form [formGroup]="productForm">
-  <div>
-    <span class="p-float-label">
-    <input type="text" pInputText formControlName="name"
-           [ngClass]="{ 'is-invalid': submittedProductForm && validateForm.name.errors}">
-    <label>Product name</label>
-    </span>
-    <p *ngIf="submittedProductForm && validateForm.name.errors">Product name is required field</p>
-  </div>
+<div class="container">
+  <h2>Edit Product</h2>
   <br>
+  <form [formGroup]="productForm">
+    <div>
+      <span class="p-float-label">
+      <input type="text" pInputText formControlName="name"
+             [ngClass]="{ 'is-invalid': submittedProductForm && validateForm.name.errors}">
+      <label>Product name</label>
+      </span>
+      <p class="error-msg" *ngIf="submittedProductForm && validateForm.name.errors">Product name is required field</p>
+    </div>
+    <br>
+    <br>
+    <div>
+      <span class="p-float-label">
+      <input type="number" pInputText formControlName="price"
+             [ngClass]="{ 'is-invalid': submittedProductForm && validateForm.price.errors}">
+      <label>Product price</label>
+      </span>
+      <p class="error-msg" *ngIf="submittedProductForm && validateForm.price.errors">Product price is required field</p>
+    </div>
+    <br>
+    <br>
+    <div>
+      <span class="p-float-label">
+      <input type="text" pInputText formControlName="image"
+             [ngClass]="{ 'is-invalid': submittedProductForm && validateForm.image.errors}">
+      <label>Product image(url)</label>
+      </span>
+      <p class="error-msg" *ngIf="submittedProductForm && validateForm.image.errors">Product image is required field</p>
+    </div>
+    <br>
+    <br>
+    <div>
+      <p-dropdown [options]="categories" optionLabel="name" formControlName="category"
+                  [ngClass]="{ 'is-invalid': submittedProductForm && validateForm.category.errors}"></p-dropdown>
+      <p class="error-msg" *ngIf="submittedProductForm && validateForm.category.errors">Product category is required field</p>
+    </div>
+  </form>
   <br>
-  <div>
-    <span class="p-float-label">
-    <input type="number" pInputText formControlName="price"
-           [ngClass]="{ 'is-invalid': submittedProductForm && validateForm.price.errors}">
-    <label>Product price</label>
-    </span>
-    <p *ngIf="submittedProductForm && validateForm.price.errors">Product price is required field</p>
-  </div>
-  <br>
-  <br>
-  <div>
-    <span class="p-float-label">
-    <input type="text" pInputText formControlName="image"
-           [ngClass]="{ 'is-invalid': submittedProductForm && validateForm.image.errors}">
-    <label>Product image(url)</label>
-    </span>
-    <p *ngIf="submittedProductForm && validateForm.image.errors">Product image is required field</p>
-  </div>
-  <br>
-  <br>
-  <div>
-    <p-dropdown [options]="categories" optionLabel="name" formControlName="category"
-                [ngClass]="{ 'is-invalid': submittedProductForm && validateForm.category.errors}"></p-dropdown>
-    <p *ngIf="submittedProductForm && validateForm.category.errors">Product category is required field</p>
-  </div>
-</form>
-<br>
-<button pButton type="button" label="Edit" class="p-button-outlined" (click)="editProduct()"></button>
+  <button pButton type="button" label="Edit" class="p-button" (click)="editProduct()"></button>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Category} from "../models/category";
 import {CategoriesList} from "../categories";
 import {BackendService} from "../services/backend.service";
+import {ConfirmationService} from "primeng/api";
 
 @Component({
   selector: 'app-category',
@@ -12,7 +13,8 @@ export class CategoryComponent implements OnInit {
   categories: Category[] =  [];
 
   constructor(
-    private service: BackendService
+    private service: BackendService,
+    private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit() {
@@ -26,7 +28,12 @@ export class CategoryComponent implements OnInit {
 
   // deleting category
   deleteCategory(id:number) {
-    this.service.deleteCategory(id);
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete category?',
+      accept: () => {
+        this.service.deleteCategory(id);
+      }
+    });
   }
 
 }

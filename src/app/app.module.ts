@@ -21,7 +21,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {DropdownModule} from "primeng/dropdown";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ConfirmationService} from "primeng/api";
-import {DialogModule} from "primeng/dialog";
+import {MessagesModule} from "primeng/messages";
 
 @NgModule({
   declarations: [
@@ -49,7 +49,7 @@ import {DialogModule} from "primeng/dialog";
     InputTextModule,
     DropdownModule,
     ConfirmDialogModule,
-    DialogModule
+    MessagesModule
   ],
   providers: [BackendService, ConfirmationService],
   bootstrap: [AppComponent]

@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+.error-msg {
+  color: red !important;
+}
+
+.container {
+  padding: 30px;
+  width: 20%;
+  margin: 0 auto;
+  background: lightgrey;
+
+  input {
+    width: 100%;
+  }
+
+  .p-dropdown {
+    width: 100% !important;
+  }
+}
