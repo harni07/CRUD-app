@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 import {Product} from "../models/product";
-import {ProductsList} from "../products";
 import {Category} from "../models/category";
-import {CategoriesList} from "../categories";
 
 @Injectable()
 export class BackendService {
-  products: Product[] =  ProductsList;
-  categories: Category[] =  CategoriesList;
+  products: Product[] =  [];
+  categories: Category[] =  [];
 
   constructor() { }
 
   getProducts(): any {
+    this.products = JSON.parse(<string>localStorage.getItem('products'));
     return this.products;
   }
   getCategories(): any {
+    this.categories = JSON.parse(<string>localStorage.getItem('categories'));
     return this.categories;
   }
 
   getProductById(id:number) {
+    this.getProducts();
     let product;
     this.products?.map( (i:Product) => {
       if (i.id === Number(id)) {
@@ -29,6 +30,7 @@ export class BackendService {
   }
 
   getCategoryById(id:number) {
+    this.getCategories();
     let category;
     this.categories?.map( (i:Category) => {
       if (i.id === Number(id)) {
@@ -41,10 +43,12 @@ export class BackendService {
 
   createCategory(name:string) {
     this.categories.push( {id: this.categories.length, name: name});
+    localStorage.setItem('categories', JSON.stringify(this.categories));
   }
 
   createProduct(product:Product) {
     this.products.push( {id: this.products.length, name: product.name, price: Number(product.price), image: product.image, category:product.category});
+    localStorage.setItem('products', JSON.stringify(this.products));
   }
 
   editCategory(id:number, name:string) {
@@ -53,6 +57,8 @@ export class BackendService {
         i.name = name;
       }
     });
+    localStorage.setItem('categories', JSON.stringify(this.categories));
+
   }
 
   editProduct(id:number, product:Product) {
@@ -64,6 +70,7 @@ export class BackendService {
         i.category = product.category;
       }
     });
+    localStorage.setItem('products', JSON.stringify(this.products));
   }
 
   deleteProduct(id:number) {
@@ -72,6 +79,7 @@ export class BackendService {
         this.products.splice(index, 1)
       }
     });
+    localStorage.setItem('products', JSON.stringify(this.products));
   }
 
   deleteCategory(id:number) {
@@ -80,6 +88,7 @@ export class BackendService {
         this.categories.splice(index, 1)
       }
     });
+    localStorage.setItem('categories', JSON.stringify(this.categories));
   }
 
 }
