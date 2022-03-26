@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
+import {Product} from "./models/product";
+import {Category} from "./models/category";
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,8 @@ import {MenuItem} from "primeng/api";
 export class AppComponent implements OnInit{
   title = 'crud-app';
 
-  products = [
+  products:Product[] = [];
+  originalProducts = [
     { "id": 1, "name": "Book", "price": 50,
       "image": "http://smartmobilestudio.com/wp-content/uploads/2012/06/leather-book-preview.png",
       "category": "Small" },
@@ -21,7 +24,8 @@ export class AppComponent implements OnInit{
       "category": "Medium" }
   ];
 
-  categories = [
+  categories:Category[] = [];
+  originalCategories = [
     {
       "id": 1, "name": "Small"
     },
@@ -49,11 +53,11 @@ export class AppComponent implements OnInit{
   ngOnInit() {
     this.products = JSON.parse(<string>localStorage.getItem('products'));
     this.categories = JSON.parse(<string>localStorage.getItem('categories'));
-    if (this.products?.length === 3 ) {
-      localStorage.setItem('products', JSON.stringify(this.products));
+    if (this.products?.length === 3  || this.products === null) {
+      localStorage.setItem('products', JSON.stringify(this.originalProducts));
     }
-    if (this.categories?.length === 3 ) {
-      localStorage.setItem('categories', JSON.stringify(this.categories));
+    if (this.categories?.length === 3  || this.categories === null ) {
+      localStorage.setItem('categories', JSON.stringify(this.originalCategories));
     }
 
   }
