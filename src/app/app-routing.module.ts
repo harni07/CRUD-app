@@ -5,6 +5,7 @@ import {CategoryComponent} from "./category/category.component";
 import {CategoryCreateComponent} from "./category-create/category-create.component";
 import {CategoryProfileComponent} from "./category-profile/category-profile.component";
 import {ProductCreateComponent} from "./product-create/product-create.component";
+import {ProductProfileComponent} from "./product-profile/product-profile.component";
 
 const routes: Routes = [
   {
@@ -34,7 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'products/edit/:id',
-    component: CategoryProfileComponent
+    component: ProductProfileComponent
   },
 ];
 

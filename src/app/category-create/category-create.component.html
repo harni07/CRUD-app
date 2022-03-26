@@ -1,1 +1,12 @@
-<p>category-create works!</p>
+<br>
+<br>
+<form [formGroup]="categoryForm">
+  <span class="p-float-label">
+    <input id="float-input" type="text" pInputText formControlName="name"
+           [ngClass]="{ 'is-invalid': submittedCategoryForm && validateForm.name.errors}">
+    <label for="float-input">Category name</label>
+  </span>
+  <p *ngIf="submittedCategoryForm && validateForm.name.errors">Category name is required field</p>
+</form>
+<br>
+<button pButton type="button" label="Create" class="p-button-outlined" (click)="createCategory()"></button>

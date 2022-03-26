@@ -1,8 +1,14 @@
+<label>Sort:</label>
+<br>
+<p-dropdown [options]="categories" optionLabel="name" (click)="sortProducts($event)"></p-dropdown>
+<br>
+<br>
 <p-table [value]="products" responsiveLayout="scroll">
   <ng-template pTemplate="caption">
     <div class="flex align-items-center justify-content-between">
       Products
     </div>
+    <button pButton type="button" label="New Product" class="p-button-outlined" routerLink="/products/new"></button> &nbsp;
   </ng-template>
   <ng-template pTemplate="header">
     <tr>
@@ -21,7 +27,7 @@
       <td>{{product.category}}</td>
       <td>
         <button pButton type="button" label="Edit" class="p-button-outlined" routerLink="/products/edit/{{product.id}}"></button> &nbsp;
-        <button pButton type="button" label="Delete" class="p-button-danger p-button-outlined"></button>
+        <button pButton type="button" label="Delete" class="p-button-danger p-button-outlined" (click)="deleteProduct(product.id)"></button>
       </td>
     </tr>
   </ng-template>
@@ -31,3 +37,8 @@
     </div>
   </ng-template>
 </p-table>
+<p-dialog header="GeeksforGeeks">
+
+  <p>Angular PrimeNG Dialog Component</p>
+
+</p-dialog>

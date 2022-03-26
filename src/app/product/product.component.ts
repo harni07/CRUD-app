@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from "../models/product";
+import {BackendService} from "../services/backend.service";
+import {Category} from "../models/category";
+import {ConfirmationService} from "primeng/api";
 
 @Component({
   selector: 'app-product',
@@ -8,16 +11,54 @@ import {Product} from "../models/product";
 })
 export class ProductComponent implements OnInit {
   products: Product[] =  [];
+  originalProducts: Product[] =  [];
+  categories: Category[] =  [];
 
-  constructor() { }
+  constructor(
+    private service: BackendService,
+    private confirmationService: ConfirmationService
+  ) { }
 
   ngOnInit() {
-
-    this.products = [
-      {id: 1, name: 'Book', price: 50, image: 'http://smartmobilestudio.com/wp-content/uploads/2012/06/leather-book-preview.png', category: 1, categoryName: 'Small' },
-      {id: 2, name: 'Car', price: 50000, image: 'https://web-cdn.rimac-automobili.com/wp-content/uploads/2021/05/31101405/intro_slider_07_optimised.jpg', category: 2, categoryName: 'Medium'},
-      {id: 3, name: 'Laptop', price: 500, image: 'https://images.prismic.io/frameworkmarketplace/5dc5fc06-aec5-4f28-a924-0230aa91a360_Pre-Marketplace+-+image_02.jpg?auto=compress,format', category: 3, categoryName: 'Large'},
-    ]
+    this.getProducts();
+    this.getCategories();
   }
 
+
+  sortProducts(event:any) {
+    this.products = [];
+    if (event.target.innerText === 'All categories') {
+      this.products = this.originalProducts;
+      return;
+    }
+    this.originalProducts?.map( (i:Product) => {
+      if (i.category === event.target.innerText) {
+        this.products.push(i);
+      }
+    });
+  }
+
+  // fetch all categories
+  getCategories() {
+    this.categories.push( {id: 0, name: 'All categories'})
+    this.service.getCategories().map( (i:Category) => {
+      this.categories.push(i);
+    });
+  }
+
+  // fetch all products
+  getProducts() {
+    this.products = this.service.getProducts();
+    this.originalProducts = this.service.getProducts();
+  }
+
+  // deleting product
+  deleteProduct(id:number) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete product?',
+      accept: () => {
+        this.service.deleteProduct(id);
+      }
+    });
+  }
 }

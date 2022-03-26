@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {BackendService} from "../services/backend.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-category-create',
@@ -7,9 +10,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryCreateComponent implements OnInit {
 
-  constructor() { }
+  categoryForm: FormGroup;
+  submittedCategoryForm = false;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private service: BackendService,
+    private router: Router,
+  )
+  {
+
+    this.categoryForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+    });
+
+  }
 
   ngOnInit(): void {
+
+  }
+
+  get validateForm() {
+    return this.categoryForm.controls
+  }
+
+  createCategory() {
+
+    this.submittedCategoryForm = true;
+
+    if (this.categoryForm.invalid) {
+      return;
+    }
+
+    console.log('da');
+
+    this.service.createCategory(this.categoryForm.value.name);
+    console.log('da 1');
+    this.router.navigate(['/categories']);
+    this.submittedCategoryForm = false;
+
+
   }
 
 }

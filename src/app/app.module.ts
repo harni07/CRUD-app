@@ -15,7 +15,13 @@ import {TableModule} from "primeng/table";
 import {HttpClientModule} from "@angular/common/http";
 import {ButtonModule} from "primeng/button";
 import {RatingModule} from "primeng/rating";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BackendService} from "./services/backend.service";
+import {InputTextModule} from "primeng/inputtext";
+import {DropdownModule} from "primeng/dropdown";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ConfirmationService} from "primeng/api";
+import {DialogModule} from "primeng/dialog";
 
 @NgModule({
   declarations: [
@@ -31,15 +37,21 @@ import {FormsModule} from "@angular/forms";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     TableModule,
     HttpClientModule,
     ButtonModule,
     RatingModule,
     FormsModule,
     MenubarModule,
-    AccordionModule
+    AccordionModule,
+    InputTextModule,
+    DropdownModule,
+    ConfirmDialogModule,
+    DialogModule
   ],
-  providers: [],
+  providers: [BackendService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

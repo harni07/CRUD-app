@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Category} from "../models/category";
+import {CategoriesList} from "../categories";
+import {BackendService} from "../services/backend.service";
 
 @Component({
   selector: 'app-category',
@@ -9,15 +11,22 @@ import {Category} from "../models/category";
 export class CategoryComponent implements OnInit {
   categories: Category[] =  [];
 
-  constructor() { }
+  constructor(
+    private service: BackendService
+  ) { }
 
   ngOnInit() {
+    this.getCategories();
+  }
 
-    this.categories = [
-      {id: 1, name: 'Small'},
-      {id: 2, name: 'Medium'},
-      {id: 3, name: 'Large'},
-    ]
+  // fetch all categories
+  getCategories() {
+    this.categories = this.service.getCategories();
+  }
+
+  // deleting category
+  deleteCategory(id:number) {
+    this.service.deleteCategory(id);
   }
 
 }
