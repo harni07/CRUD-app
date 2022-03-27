@@ -53,12 +53,10 @@ export class AppComponent implements OnInit{
   items: MenuItem[] = [
     {
       label: 'Categories',
-      icon: 'pi pi-fw pi-pencil',
       routerLink: 'categories'
     },
     {
       label: 'Products',
-      icon: 'pi pi-fw pi-pencil',
       routerLink: 'products'
     }
   ];

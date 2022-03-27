@@ -29,6 +29,8 @@
   </ng-template>
 </p-table>
 
+
+<!--modal for creating/editing category-->
 <p-dialog header="{{isEditCategory ? 'Edit category' : 'Create new category'}}" [(visible)]="display">
   <form [formGroup]="categoryForm">
     <span class="p-float-label">
@@ -42,3 +44,4 @@
   <button *ngIf="isEditCategory" pButton type="button" label="Edit" class="p-button-outlined" (click)="editCategory()"></button>
   <button *ngIf="!isEditCategory" pButton type="button" label="Create" class="p-button-outlined" (click)="createCategory()"></button>
 </p-dialog>
+<!--modal for creating/editing category-->

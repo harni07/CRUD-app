@@ -53,10 +53,12 @@ export class ProductCreateComponent implements OnInit {
     });
   }
 
+  // to check for errors
   get validateForm() {
     return this.productForm.controls
   }
 
+  // create product
   createProduct() {
 
     this.submittedProductForm = true;

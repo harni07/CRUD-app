@@ -20,6 +20,7 @@ export class CategoryCreateComponent implements OnInit {
   )
   {
 
+    // initialize form
     this.categoryForm = this.formBuilder.group({
       name: ['', [Validators.required]],
     });
@@ -30,6 +31,7 @@ export class CategoryCreateComponent implements OnInit {
 
   }
 
+  // to check for errors
   get validateForm() {
     return this.categoryForm.controls
   }

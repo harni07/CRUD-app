@@ -28,6 +28,7 @@ export class CategoryProfileComponent implements OnInit {
       this.categoryId = params.id;
     });
 
+    // initialize form
     this.categoryForm = this.formBuilder.group({
       name: ['', [Validators.required]],
     });
@@ -39,17 +40,20 @@ export class CategoryProfileComponent implements OnInit {
 
   }
 
+  // to check for errors
   get validateForm() {
     return this.categoryForm.controls
   }
 
 
+  // get category data to patch values in form
   getCategoryData() {
     let categoryData:any = this.service.getCategoryById(this.categoryId);
     this.categoryForm.patchValue(categoryData)
   }
 
 
+  // edit category
   editCategory() {
 
     this.submittedCategoryForm = true;

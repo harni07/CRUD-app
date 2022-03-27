@@ -30,6 +30,7 @@ export class ProductProfileComponent implements OnInit {
       this.productId = params.id;
     });
 
+    // initialize form
     this.productForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       price: [, [Validators.required]],
@@ -46,19 +47,23 @@ export class ProductProfileComponent implements OnInit {
 
   }
 
+  //get categories
   getCategories() {
     this.categories = this.service.getCategories();
   }
 
+  // get product data to patch values in form
   getProductData() {
     let data:any = this.service.getProductById(this.productId);
     this.productForm.patchValue(data);
   }
 
+  // to check for errors
   get validateForm() {
     return this.productForm.controls
   }
 
+  //edit product
   editProduct() {
 
     this.submittedProductForm = true;

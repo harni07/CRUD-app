@@ -4,6 +4,7 @@
 
 .label-margin {
   margin-left: 42px;
+  margin-right: 10px;
 }
 
 
@@ -111,7 +112,10 @@
   margin-bottom: 2rem;
 }
 
-.product-image {
+@media (max-width: 800px) {
+  .btn-margin {
+    margin-top: 10px;
+  }
 }
 
 @media screen and (max-width: 576px) {

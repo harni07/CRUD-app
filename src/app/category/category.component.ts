@@ -40,7 +40,6 @@ export class CategoryComponent implements OnInit {
     this.getCategories();
   }
 
-
   // to check for errors
   get validateForm() {
     return this.categoryForm.controls
@@ -69,6 +68,8 @@ export class CategoryComponent implements OnInit {
     if (this.categoryForm.invalid) {
       return;
     }
+
+    // if form is validated create category, fetch results to get new value and reset form and close modal
     this.service.createCategory(this.categoryForm.value.name);
     this.getCategories()
     this.submittedCategoryForm = false;
@@ -93,6 +94,7 @@ export class CategoryComponent implements OnInit {
       return;
     }
 
+    // if form is validated edit category, fetch results to get new value and reset form and close modal
     this.service.editCategory(this.selectedCategoryId, this.categoryForm.value.name);
     this.submittedCategoryForm = false;
     this.getCategories();

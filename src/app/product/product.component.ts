@@ -126,6 +126,7 @@ export class ProductComponent implements OnInit {
       return;
     }
 
+    // if form is validated create product, fetch results to get new value and reset form and close modal
     this.service.createProduct(this.productForm.value);
     this.getProducts();
     this.productForm.reset();
@@ -150,6 +151,7 @@ export class ProductComponent implements OnInit {
       return;
     }
 
+    // if form is validated edit product, fetch results to get new value and reset form and close modal
     this.service.editProduct(this.selectedProductId, this.productForm.value);
     this.submittedProductForm = false;
     this.isEditProduct = false;
