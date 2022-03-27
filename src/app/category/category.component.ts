@@ -114,7 +114,7 @@ export class CategoryComponent implements OnInit {
       accept: () => {
         this.service.deleteCategory(id);
         this.getCategories();
-        this.messageService.add({severity:'error', summary: 'Success', detail: 'Category deleted successfully'});
+        this.messageService.add({severity:'success', summary: 'Success', detail: 'Category deleted successfully'});
       }
     });
   }

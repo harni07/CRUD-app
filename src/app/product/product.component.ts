@@ -171,7 +171,7 @@ export class ProductComponent implements OnInit {
       accept: () => {
         this.service.deleteProduct(id);
         this.getProducts();
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Product deleted successfully'});
+        this.messageService.add({severity:'success', summary: 'Success', detail: 'Product deleted successfully'});
       }
     });
   }
