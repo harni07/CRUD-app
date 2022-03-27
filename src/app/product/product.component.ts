@@ -69,6 +69,7 @@ export class ProductComponent implements OnInit {
   openCreateCategoryModal(productId:number) {
     this.isEditProduct = false;
     this.productForm.reset();
+    this.submittedProductForm = false;
     if (productId !== 0 ) {
       this.isEditProduct = true;
       this.selectedProductId = productId;

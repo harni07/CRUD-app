@@ -50,6 +50,7 @@ export class CategoryComponent implements OnInit {
   openCreateCategoryModal(categoryId:number) {
     this.display = true;
     this.categoryForm.reset();
+    this.submittedCategoryForm = false;
     if (categoryId !== 0 ) {
       this.isEditCategory = true;
       this.selectedCategoryId = categoryId;
