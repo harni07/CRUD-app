@@ -1,5 +1,12 @@
 @import 'primeflex/primeflex.css';
 
+.p-menubar {
+  margin-bottom: 15px !important;
+}
+
+.element-space {
+  margin-bottom: 30px;
+}
 
 .error-msg {
   color: red !important;
@@ -9,7 +16,8 @@
   padding: 30px;
   width: 20%;
   margin: 0 auto;
-  background: lightgrey;
+  background: #dee2e6;
+  border-radius: 8px;
 
   input {
     width: 100%;
@@ -19,7 +27,6 @@
     width: 100% !important;
   }
 }
-
 
 @media( max-width: 800px) {
   .container {

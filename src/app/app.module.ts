@@ -24,6 +24,7 @@ import {ConfirmationService} from "primeng/api";
 import {MessagesModule} from "primeng/messages";
 import {DialogModule} from "primeng/dialog";
 import {DataViewModule} from "primeng/dataview";
+import {CardModule} from "primeng/card";
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {DataViewModule} from "primeng/dataview";
     ConfirmDialogModule,
     MessagesModule,
     DialogModule,
-    DataViewModule
+    DataViewModule,
+    CardModule
   ],
   providers: [BackendService, ConfirmationService],
   bootstrap: [AppComponent]

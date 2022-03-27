@@ -1,8 +1,5 @@
-<br>
-<button pButton type="button" label="New Category" class="p-button-outlined" routerLink="/categories/new"></button>
-<button pButton type="button" label="New Category v2" class="p-button-outlined" (click)="openCreateCategoryModal(0)"></button>
-<br>
-<br>
+<button pButton type="button" label="New Category" class="p-button-outlined btn-margin" routerLink="/categories/new"></button>
+<button pButton type="button" label="New Category v2" class="p-button-outlined btn-margin" (click)="openCreateCategoryModal(0)"></button>
 <p-table [value]="categories" responsiveLayout="scroll">
   <ng-template pTemplate="caption">
     <div class="flex align-items-center justify-content-between">
@@ -35,8 +32,8 @@
 <p-dialog header="{{isEditCategory ? 'Edit category' : 'Create new category'}}" [(visible)]="display">
   <form [formGroup]="categoryForm">
     <span class="p-float-label">
-      <input id="float-input" type="text" pInputText formControlName="name"
-             [ngClass]="{ 'is-invalid': submittedCategoryForm && validateForm.name.errors}">
+      <input id="float-input" type="text" pInputText formControlName="name" class=""
+             [ngClass]="{ 'ng-invalid ng-dirty': submittedCategoryForm && validateForm.name.errors}">
       <label for="float-input">Category name</label>
     </span>
     <p class="error-msg" *ngIf="submittedCategoryForm && validateForm.name.errors">Category name is required field</p>

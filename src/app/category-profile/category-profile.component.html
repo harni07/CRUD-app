@@ -1,14 +1,14 @@
 <div class="container">
   <h2>Edit category</h2>
-  <br>
   <form [formGroup]="categoryForm">
-    <span class="p-float-label">
-      <input id="float-input" type="text" pInputText formControlName="name"
-             [ngClass]="{ 'is-invalid': submittedCategoryForm && validateForm.name.errors}">
-      <label for="float-input">Category name</label>
-    </span>
-    <p class="error-msg" *ngIf="submittedCategoryForm && validateForm.name.errors">Category name is required field</p>
+    <div class="element-space">
+      <span class="p-float-label">
+        <input id="float-input" type="text" pInputText formControlName="name"
+               [ngClass]="{ 'ng-invalid ng-dirty': submittedCategoryForm && validateForm.name.errors}">
+        <label for="float-input">Category name</label>
+      </span>
+      <p class="error-msg" *ngIf="submittedCategoryForm && validateForm.name.errors">Category name is required field</p>
+    </div>
   </form>
-  <br>
   <button pButton type="button" label="Edit" class="p-button-outlined" (click)="editCategory()"></button>
 </div>
