@@ -47,7 +47,7 @@ export class ProductCreateComponent implements OnInit {
   }
 
   getCategories() {
-    this.categories.push( {id: 0, name: 'Select category'})
+    this.categories.push( {id: 0, name: 'Select category'});
     this.service.getCategories().map( (i:Category) => {
       this.categories.push(i);
     });

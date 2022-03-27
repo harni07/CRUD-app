@@ -23,7 +23,7 @@ export class CategoryProfileComponent implements OnInit {
     private route: ActivatedRoute,
   )
   {
-    // receive property id
+    // receive category id
     this.route.params.subscribe( (params:any) => {
       this.categoryId = params.id;
     });

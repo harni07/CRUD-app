@@ -1,45 +1,142 @@
-<br>
 <button pButton type="button" label="New Product" class="p-button-outlined" routerLink="/products/new"></button>
+<button pButton type="button" label="New Product v2" class="p-button-outlined" (click)="openCreateCategoryModal(0)"></button>
 <br>
 <br>
 <label>Sort:</label>
 <br>
-<p-dropdown [options]="categories" optionLabel="name" (click)="sortProducts($event)"></p-dropdown>
-<br>
-<br>
-<p-table [value]="products" responsiveLayout="scroll">
-  <ng-template pTemplate="caption">
-    <div class="flex align-items-center justify-content-between">
-      Products
-    </div>
-  </ng-template>
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Name</th>
-      <th>Image</th>
-      <th>Price</th>
-      <th>Category</th>
-      <th>Actions</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-product>
-    <tr>
-      <td>{{product.name}}</td>
-      <td><img [src]="product.image" [alt]="product.name" width="100" class="shadow-4" /></td>
-      <td>{{product.price | currency:'EUR'}}</td>
-      <td>{{product.category}}</td>
-      <td>
-        <button pButton type="button" label="Edit" class="p-button-outlined" routerLink="/products/edit/{{product.id}}"></button> &nbsp;
-        <button pButton type="button" label="Delete" class="p-button-danger p-button-outlined" (click)="deleteProduct(product.id)"></button>
-      </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="summary">
-    <div class="flex align-items-center justify-content-between">
-      In total there are {{products ? products.length : 0 }} products.
-    </div>
-  </ng-template>
-</p-table>
+<p-dropdown [options]="categoriesSort" optionLabel="name" (click)="sortProducts($event)"></p-dropdown>
+<!--<br>-->
+<!--<br>-->
+<!--<p-table [value]="products" responsiveLayout="scroll">-->
+<!--  <ng-template pTemplate="caption">-->
+<!--    <div class="flex align-items-center justify-content-between">-->
+<!--      Products-->
+<!--    </div>-->
+<!--  </ng-template>-->
+<!--  <ng-template pTemplate="header">-->
+<!--    <tr>-->
+<!--      <th>Name</th>-->
+<!--      <th>Image</th>-->
+<!--      <th>Price</th>-->
+<!--      <th>Category</th>-->
+<!--      <th>Actions</th>-->
+<!--    </tr>-->
+<!--  </ng-template>-->
+<!--  <ng-template pTemplate="body" let-product>-->
+<!--    <tr>-->
+<!--      <td>{{product.name}}</td>-->
+<!--      <td><img [src]="product.image" [alt]="product.name" width="100" class="shadow-4" /></td>-->
+<!--      <td>{{product.price | currency:'EUR'}}</td>-->
+<!--      <td>{{product.category}}</td>-->
+<!--      <td>-->
+<!--        <button pButton type="button" label="Edit" class="p-button-outlined" routerLink="/products/edit/{{product.id}}"></button> &nbsp;-->
+<!--        <button pButton type="button" label="Edit v2" class="p-button-outlined"  (click)="openCreateCategoryModal(product.id)"></button> &nbsp;-->
+<!--        <button pButton type="button" label="Delete" class="p-button-danger p-button-outlined" (click)="deleteProduct(product.id)"></button>-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--  </ng-template>-->
+<!--  <ng-template pTemplate="summary">-->
+<!--    <div class="flex align-items-center justify-content-between">-->
+<!--      In total there are {{products ? products.length : 0 }} products.-->
+<!--    </div>-->
+<!--  </ng-template>-->
+<!--</p-table>-->
+
+
+<div class="card">
+  <p-dataView #dv [value]="products" [paginator]="true" [rows]="3" filterBy="name"
+              layout="grid">
+    <ng-template pTemplate="header">
+      <div class="flex flex-column md:flex-row md:justify-content-between">
+        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+      </div>
+    </ng-template>
+    <ng-template let-product pTemplate="listItem">
+      <div class="col-12">
+        <div class="product-list-item">
+          <img class="product-image" [src]="product.image" [alt]="product.name"/>
+          <div class="product-list-detail">
+            <div class="product-name">{{product.name}}</div>
+            <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.category}}</span>
+          </div>
+          <div class="product-list-action">
+            <span class="product-price">${{product.price}}</span>
+            <p-button icon="pi pi-shopping-cart" label="Edit" (click)="openCreateCategoryModal(product.id)"></p-button>
+            <button pButton type="button" label="Delete" class="p-button-danger p-button-outlined" (click)="deleteProduct(product.id)"></button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template let-product pTemplate="gridItem">
+      <div class="col-12 md:col-4">
+        <div class="product-grid-item card">
+          <div class="product-grid-item-top">
+            <div>
+              <i class="pi pi-tag product-category-icon"></i>
+              <span class="product-category">{{product.category}}</span>
+            </div>
+            <button pButton type="button" label="Delete" class="p-button-danger p-button-outlined" (click)="deleteProduct(product.id)"></button>
+          </div>
+          <div class="product-grid-item-content">
+            <img [src]="product.image" [alt]="product.name"/>
+            <div class="product-name">{{product.name}}</div>
+          </div>
+          <div class="product-grid-item-bottom">
+            <span class="product-price">${{product.price}}</span>
+            <p-button icon="pi pi-shopping-cart" label="Edit" (click)="openCreateCategoryModal(product.id)"></p-button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataView>
+</div>
+
+
+<!--modal for creating and editing products-->
+<p-dialog header="{{isEditProduct ? 'Edit Product' : 'Create new Product'}}" [(visible)]="display">
+    <form [formGroup]="productForm">
+      <div>
+        <span class="p-float-label">
+        <input type="text" pInputText formControlName="name"
+               [ngClass]="{ 'is-invalid': submittedProductForm && validateForm.name.errors}">
+        <label>Product name</label>
+        </span>
+        <p class="error-msg" *ngIf="submittedProductForm && validateForm.name.errors">Product name is required field</p>
+      </div>
+      <br>
+      <div>
+        <span class="p-float-label">
+        <input type="number" pInputText formControlName="price"
+               [ngClass]="{ 'is-invalid': submittedProductForm && validateForm.price.errors}">
+        <label>Product price</label>
+        </span>
+        <p class="error-msg" *ngIf="submittedProductForm && validateForm.price.errors">Product price is required field</p>
+      </div>
+      <br>
+      <div>
+        <span class="p-float-label">
+        <input type="text" pInputText formControlName="image"
+               [ngClass]="{ 'is-invalid': submittedProductForm && validateForm.image.errors}">
+        <label>Product image(url)</label>
+        </span>
+        <p class="error-msg" *ngIf="submittedProductForm && validateForm.image.errors?.required">Product image is required field</p>
+      </div>
+      <br>
+      <div>
+        <p-dropdown [options]="categories" formControlName="category"
+                    [ngClass]="{ 'is-invalid': submittedProductForm && validateForm.category.errors}"></p-dropdown>
+        <p class="error-msg" *ngIf="submittedProductForm && validateForm.category.errors">Product category is required field</p></div>
+      <br>
+      <br>
+      <br>
+      <br>
+
+    </form>
+    <br>
+    <button *ngIf="isEditProduct" pButton type="button" label="Edit" class="p-button" (click)="editProduct()"></button>
+    <button *ngIf="!isEditProduct" pButton type="button" label="Create" class="p-button" (click)="createProduct()"></button>
+
+</p-dialog>
 
 
 

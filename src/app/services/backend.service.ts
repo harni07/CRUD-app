@@ -43,13 +43,13 @@ export class BackendService {
 
   createCategory(name:string) {
     this.getCategories();
-    this.categories.push( {id: this.categories.length === 0 ? 1 : this.categories.length, name: name});
+    this.categories.push( {id: Math.floor(Math.random() * (10000 - 3 + 1) + 3), name: name});
     localStorage.setItem('categories', JSON.stringify(this.categories));
   }
 
   createProduct(product:Product) {
     this.getProducts();
-    this.products.push( {id: this.products.length === 0 ? 1 : this.products.length, name: product.name, price: Number(product.price), image: product.image, category:product.category});
+    this.products.push( {id: Math.floor(Math.random() * (10000 - 3 + 1) + 3), name: product.name, price: Number(product.price), image: product.image, category:product.category});
     localStorage.setItem('products', JSON.stringify(this.products));
   }
 

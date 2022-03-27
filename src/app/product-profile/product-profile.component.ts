@@ -25,7 +25,7 @@ export class ProductProfileComponent implements OnInit {
     private route: ActivatedRoute,
   )
   {
-    // receive property id
+    // receive product id
     this.route.params.subscribe( (params:any) => {
       this.productId = params.id;
     });
@@ -52,7 +52,6 @@ export class ProductProfileComponent implements OnInit {
 
   getProductData() {
     let data:any = this.service.getProductById(this.productId);
-    console.log(data, 'kj');
     this.productForm.patchValue(data);
   }
 

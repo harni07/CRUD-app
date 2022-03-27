@@ -42,10 +42,8 @@ export class CategoryCreateComponent implements OnInit {
       return;
     }
 
-    console.log('da');
 
     this.service.createCategory(this.categoryForm.value.name);
-    console.log('da 1');
     this.router.navigate(['/categories']);
     this.submittedCategoryForm = false;
 
