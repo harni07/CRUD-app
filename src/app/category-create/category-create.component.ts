@@ -16,7 +16,7 @@ export class CategoryCreateComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private service: BackendService,
-    private router: Router,
+    private router: Router
   )
   {
 

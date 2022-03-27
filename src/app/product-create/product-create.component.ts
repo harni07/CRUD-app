@@ -23,7 +23,7 @@ export class ProductCreateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: BackendService,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   )
   {
     // receive property id
@@ -77,6 +77,5 @@ export class ProductCreateComponent implements OnInit {
     this.service.createProduct(this.productForm.value);
     this.router.navigate(['/products']);
     this.submittedProductForm = false;
-
   }
 }

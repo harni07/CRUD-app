@@ -22,7 +22,7 @@ export class ProductProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: BackendService,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   )
   {
     // receive product id

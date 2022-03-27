@@ -20,11 +20,12 @@ import {BackendService} from "./services/backend.service";
 import {InputTextModule} from "primeng/inputtext";
 import {DropdownModule} from "primeng/dropdown";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
-import {ConfirmationService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import {MessagesModule} from "primeng/messages";
 import {DialogModule} from "primeng/dialog";
 import {DataViewModule} from "primeng/dataview";
 import {CardModule} from "primeng/card";
+import {ToastModule} from "primeng/toast";
 
 @NgModule({
   declarations: [
@@ -55,9 +56,10 @@ import {CardModule} from "primeng/card";
     MessagesModule,
     DialogModule,
     DataViewModule,
-    CardModule
+    CardModule,
+    ToastModule
   ],
-  providers: [BackendService, ConfirmationService],
+  providers: [BackendService, ConfirmationService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

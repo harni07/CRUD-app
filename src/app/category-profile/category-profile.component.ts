@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BackendService} from "../services/backend.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Category} from "../models/category";
 
 @Component({
   selector: 'app-category-profile',
@@ -20,7 +19,7 @@ export class CategoryProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: BackendService,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   )
   {
     // receive category id
@@ -65,7 +64,6 @@ export class CategoryProfileComponent implements OnInit {
     this.service.editCategory(this.categoryId, this.categoryForm.value.name);
     this.router.navigate(['/categories']);
     this.submittedCategoryForm = false;
-
 
   }
 }

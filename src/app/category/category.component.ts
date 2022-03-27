@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Category} from "../models/category";
 import {BackendService} from "../services/backend.service";
-import {ConfirmationService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -26,7 +26,8 @@ export class CategoryComponent implements OnInit {
   constructor(
     private service: BackendService,
     private formBuilder: FormBuilder,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {
 
     // initialize form
@@ -75,6 +76,7 @@ export class CategoryComponent implements OnInit {
     this.submittedCategoryForm = false;
     this.display = false;
     this.categoryForm.reset();
+    this.messageService.add({severity:'success', summary: 'Success', detail: 'Category created successfully'});
 
   }
 
@@ -101,6 +103,7 @@ export class CategoryComponent implements OnInit {
     this.display = false;
     this.categoryForm.reset();
     this.isEditCategory = false;
+    this.messageService.add({severity:'success', summary: 'Success', detail: 'Category edited successfully'});
 
   }
 
@@ -111,6 +114,7 @@ export class CategoryComponent implements OnInit {
       accept: () => {
         this.service.deleteCategory(id);
         this.getCategories();
+        this.messageService.add({severity:'error', summary: 'Success', detail: 'Category deleted successfully'});
       }
     });
   }

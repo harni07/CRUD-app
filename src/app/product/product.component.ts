@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Product} from "../models/product";
 import {BackendService} from "../services/backend.service";
 import {Category} from "../models/category";
-import {ConfirmationService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -41,7 +41,8 @@ export class ProductComponent implements OnInit {
   constructor(
     private service: BackendService,
     private formBuilder: FormBuilder,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {
 
     // initialize form
@@ -132,6 +133,7 @@ export class ProductComponent implements OnInit {
     this.productForm.reset();
     this.display = false;
     this.submittedProductForm = false;
+    this.messageService.add({severity:'success', summary: 'Success', detail: 'Product created successfully'});
 
   }
 
@@ -158,6 +160,7 @@ export class ProductComponent implements OnInit {
     this.getProducts();
     this.display = false;
     this.productForm.reset();
+    this.messageService.add({severity:'success', summary: 'Success', detail: 'Product edited successfully'});
 
   }
 
@@ -168,6 +171,7 @@ export class ProductComponent implements OnInit {
       accept: () => {
         this.service.deleteProduct(id);
         this.getProducts();
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Product deleted successfully'});
       }
     });
   }
