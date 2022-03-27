@@ -101,6 +101,7 @@ export class ProductComponent implements OnInit {
     this.categoriesSort.push( {id: 0, name: 'All categories'})
     this.service.getCategories().map( (i:Category) => {
       this.categories.push(i);
+      this.categoriesSort.push(i);
     });
     let filteredArr:any = [];
     this.categories.map( i => {

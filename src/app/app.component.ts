@@ -66,7 +66,7 @@ export class AppComponent implements OnInit{
   ngOnInit() {
     this.products = JSON.parse(<string>localStorage.getItem('products'));
     this.categories = JSON.parse(<string>localStorage.getItem('categories'));
-    
+
     if (this.products?.length === 3  || this.products === null) {
       localStorage.setItem('products', JSON.stringify(this.originalProducts));
     }
